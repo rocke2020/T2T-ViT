@@ -18,7 +18,6 @@ from collections import OrderedDict
 from contextlib import suppress
 from datetime import datetime
 import models
-
 import torch
 import torch.nn as nn
 import torchvision.utils
