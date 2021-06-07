@@ -27,7 +27,8 @@ class Attention(nn.Module):
         B, N, C = x.shape
 
         qkv = self.qkv(x).reshape(B, N, 3, self.num_heads, self.head_dim).permute(2, 0, 3, 1, 4)
-        # as num_heads == 1, q, k, v size() is B, 1(self.num_heads), N, self.in_dim
+        # as num_heads == 1, self.head_dim = self.in_dim
+        # q, k, v size() is B, 1(self.num_heads), N, self.head_dim
         q, k, v = qkv[0], qkv[1], qkv[2]
 
         attn = (q * self.scale) @ k.transpose(-2, -1)

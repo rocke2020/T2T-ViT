@@ -114,13 +114,12 @@ def init_params(net):
                 init.constant(m.bias, 0)
 
 
-_, term_width = os.popen('stty size', 'r').read().split()
-term_width = int(term_width)
-
 TOTAL_BAR_LENGTH = 65.
 last_time = time.time()
 begin_time = last_time
 def progress_bar(current, total, msg=None):
+    _, term_width = os.popen('stty size', 'r').read().split()
+    term_width = int(term_width)    
     global last_time, begin_time
     if current == 0:
         begin_time = time.time()  # Reset for new bar.
@@ -214,5 +213,5 @@ def cond2d_size(input_size, kernel_size, stride, padding=(0, 0), dilation=(1, 1)
 
 
 if __name__ == "__main__":
-    ic(cond2d_size(224, 7, 4, 2))
+    ic(cond2d_size(56, 3, 2, 1))
     pass
