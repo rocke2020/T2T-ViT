@@ -20,7 +20,7 @@ import torch.nn.init as init
 import logging
 import os
 from collections import OrderedDict
-
+from icecream import ic
 _logger = logging.getLogger(__name__)
 
 
@@ -194,3 +194,25 @@ def format_time(seconds):
     if f == '':
         f = '0ms'
     return f
+
+
+def pair(t):
+    return t if isinstance(t, tuple) else (t, t)
+
+def cond2d_size(input_size, kernel_size, stride, padding=(0, 0), dilation=(1, 1)):
+    """
+    ic(cond2d_size(448, 7, 2, 3))
+    """
+    h_in, w_in = pair(input_size)
+    kernel_size_h, kernel_size_w = pair(kernel_size)
+    stride_h, stride_w = pair(stride)
+    padding_h, padding_w = pair(padding)
+    dilation_h, dilation_w = dilation
+    h_out = (h_in + 2 * padding_h - dilation_h *(kernel_size_h -1) -1) // stride_h + 1
+    w_out = (w_in + 2 * padding_w - dilation_w *(kernel_size_w -1) -1) // stride_w + 1
+    return (h_out, w_out)
+
+
+if __name__ == "__main__":
+    ic(cond2d_size(224, 7, 4, 2))
+    pass
