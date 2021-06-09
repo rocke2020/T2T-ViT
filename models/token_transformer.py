@@ -11,7 +11,7 @@ from timm.models.layers import DropPath
 from .transformer_block import Mlp
 
 class Attention(nn.Module):
-    def __init__(self, dim, num_heads=8, in_dim = None, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.):
+    def __init__(self, dim, num_heads=1, in_dim = None, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.):
         super().__init__()
         self.num_heads = num_heads
         self.in_dim = in_dim
