@@ -322,13 +322,13 @@ def main():
 
     data_config = resolve_data_config(vars(args), model=model, verbose=args.local_rank == 0)
 
-    num_aug_splits = 0
-    if args.aug_splits > 0:
+    num_aug_splits = 0  
+    if args.aug_splits > 0:  # default value 0, valid (0, or >=2)
         assert args.aug_splits > 1, 'A split of 1 makes no sense'
         num_aug_splits = args.aug_splits
 
-    if args.split_bn:
-        assert num_aug_splits > 1 or args.resplit
+    if args.split_bn:  # default False
+        assert num_aug_splits > 1 or args.resplit  # default False
         model = convert_splitbn_model(model, max(num_aug_splits, 2))
 
     use_amp = None
